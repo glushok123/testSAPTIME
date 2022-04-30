@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    
     var datasend = {
         "action":"getfilm"
     };
@@ -11,7 +12,7 @@ $(document).ready(function() {
 
     });
 
-    $('#films').on('change', function (e) {
+    $('#films').on('change', function (e) {//Получение списка фильмов
         var valueSelected = this.value;
         var datasend = {
             "action":"getkatfilm",
@@ -38,7 +39,7 @@ $(document).ready(function() {
         });
     });
 
-    $('.removeactor').on('click', function (e) {
+    $('.removeactor').on('click', function (e) {// Удаление актеров
         var valueSelected = $("#actor").val();
         var valueSelected2 = $("#films").val();
 
@@ -70,7 +71,7 @@ $(document).ready(function() {
         }
     });
 
-    $('.addactor').on('click', function (e) {
+    $('.addactor').on('click', function (e) {//Добавление актеров в фильм (предварительная функция)
         var valueSelected = $("#films").val();
         if (valueSelected.length < 1){
             alert("Необходимо выбрать фильм!")
@@ -92,15 +93,15 @@ $(document).ready(function() {
         }
     });
 
-    $('.closemodal').on('click', function (e) {
+    $('.closemodal').on('click', function (e) {//Закрытие модального окна
         $('#modaladdactor').modal('hide');
     });
 
-    $('.closemodalcop').on('click', function (e) {
+    $('.closemodalcop').on('click', function (e) {//Закрытие модального окна
         $('#modalcopactor').modal('hide');
     });
 
-    $('.addactorinfilm').on('click', function (e) {
+    $('.addactorinfilm').on('click', function (e) {//Добавление актеров в фильм
         let valueSelected = $("#addactors").val();
         let name_actor = $("#addactors option[value='"+valueSelected+"']").text();
 
@@ -143,7 +144,7 @@ $(document).ready(function() {
 
     });
 
-    $('.actorcop').on('click', function (e) {
+    $('.actorcop').on('click', function (e) {//Копирование актеров предварительная функция
         var valueSelected = $("#films").val();
         if (valueSelected.length < 1){
             alert("Необходимо выбрать фильм!")
@@ -164,7 +165,7 @@ $(document).ready(function() {
         }
     });
 
-    $('.copactorinfilm').on('click', function (e) {
+    $('.copactorinfilm').on('click', function (e) {//Копирование актеров
 
         var valueSelected = $("#copactors").val();
         if (valueSelected == null){
@@ -204,4 +205,5 @@ $(document).ready(function() {
                 });
         }
     });
+
 });

@@ -6,7 +6,8 @@ $action = $_POST["action"];
 $db = getDbInstance();
 
 
-if ($action=="getfilm"){
+
+if ($action=="getfilm"){#Получение списка фильмов
     $res = $db->query("SELECT film_id, title FROM film");
     $json = '[';
     foreach ($res as $film)
@@ -18,14 +19,14 @@ if ($action=="getfilm"){
     echo $json;
 }
 
-if ($action=="getkatfilm"){
+if ($action=="getkatfilm"){#Получение категории выбранного фильма
     $id = $_POST["id"];
     $category_id = $db->query("SELECT category_id FROM film_category WHERE film_id = $id");
     $category_name = $db->query("SELECT name FROM category WHERE category_id = ".$category_id[0]['category_id']." ");
     echo $category_name[0]['name'];
 }
 
-else if ($action=="getacterfilm"){
+else if ($action=="getacterfilm"){#Получение актеров выбранного фильма
     $id = $_POST["id"];
     $actors_id = $db->query("SELECT actor_id FROM film_actor WHERE film_id = $id");
 
@@ -43,15 +44,14 @@ else if ($action=="getacterfilm"){
     echo $json;
 }
 
-else if ($action=="deleteactor"){
+else if ($action=="deleteactor"){#Удаление актеров в фильме
     $ida = $_POST["ida"];
     $idf = $_POST["idf"];
     $db->query("DELETE FROM `film_actor` WHERE actor_id = $ida AND film_id = $idf");
-
     echo $json;
 }
 
-else if ($action=="addactors"){
+else if ($action=="addactors"){#Полкчение списка актоеров для добавления в фильм
     $idf = $_POST["idf"];
     $actors_id = $db->query("SELECT * FROM actor");
 
@@ -65,7 +65,7 @@ else if ($action=="addactors"){
     echo $json;
 }
 
-else if ($action=="addactorinfilm"){
+else if ($action=="addactorinfilm"){#Добавление актеров в фильм
 
     $ida = $_POST["ida"];
     $idf = $_POST["idf"];
@@ -73,7 +73,7 @@ else if ($action=="addactorinfilm"){
 
 }
 
-else if ($action=="colactor"){
+else if ($action=="colactor"){#Получение колличества акткров в фильме
     $id = $_POST["id"];
     $colactor = $db->query("SELECT count(*) FROM film_actor WHERE film_id = $id");
     print_r($colactor[0]['count(*)']);
