@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    
+
     var datasend = {
         "action":"getfilm"
     };
@@ -44,16 +44,34 @@ $(document).ready(function() {
         var valueSelected2 = $("#films").val();
 
         if (valueSelected2.length < 1){
-            alert("Необходимо выбрать фильм!")
+            swal({
+                title: "Ошибка",
+                text: "Необходимо выбрать фильм!",
+                type: "error",
+                confirmButtonColor: "#039BE5"
+            })
+
         }
 
 
         if (valueSelected == null){
-            alert("Необходимо выбрать актера!")
+            swal({
+                title: "Ошибка",
+                text: "Необходимо выбрать актера!",
+                type: "error",
+                confirmButtonColor: "#039BE5"
+            })
+
         }
 
         if (valueSelected.length== $('#actor option').length){
-            alert("Необходимо что бы остался минимум 1 актер!")
+            swal({
+                title: "Ошибка",
+                text: "Необходимо что бы остался минимум 1 актер!",
+                type: "error",
+                confirmButtonColor: "#039BE5"
+            })
+
         }
         else{
             $.each(valueSelected,function(index,value){
@@ -67,14 +85,26 @@ $(document).ready(function() {
                     $('#actor option[value="'+value+'"]').remove();
                 });
             });
-            alert("Успешно!")
+            swal({
+                title:"Уведомление",
+                text:"Успешно!",
+                type:"success",
+                confirmButtonColor: "#039BE5"
+            });
+
         }
     });
 
     $('.addactor').on('click', function (e) {//Добавление актеров в фильм (предварительная функция)
         var valueSelected = $("#films").val();
         if (valueSelected.length < 1){
-            alert("Необходимо выбрать фильм!")
+            swal({
+                title: "Ошибка",
+                text: "Необходимо выбрать фильм!",
+                type: "error",
+                confirmButtonColor: "#039BE5"
+            })
+
         }
         else{
             var datasend = {
@@ -106,20 +136,39 @@ $(document).ready(function() {
         let name_actor = $("#addactors option[value='"+valueSelected+"']").text();
 
         if (valueSelected.length < 1){
-            alert("Необходимо выбрать актера!")
+            swal({
+                title: "Ошибка",
+                text: "Необходимо выбрать актера!",
+                type: "error",
+                confirmButtonColor: "#039BE5"
+            })
+
         }
         else{
             var prov = 0;
             $("#actor option").each(function()
             {
                  if ( $(this).val() == valueSelected){
-                     alert("Такой актер уже есть!");
+                     swal({
+                         title: "Ошибка",
+                         text: "Такой актер уже есть!",
+                         type: "error",
+                         confirmButtonColor: "#039BE5"
+                     })
+
+
                      prov = 1;
                  }
             });
 
             if ($('#actor option').length== 15){
-              alert("Нельзя добавить больше 15 актеров!");
+                swal({
+                    title: "Ошибка",
+                    text: "Нельзя добавить больше 15 актеров!",
+                    type: "error",
+                    confirmButtonColor: "#039BE5"
+                })
+
                prov = 1;
             }
 
@@ -136,7 +185,13 @@ $(document).ready(function() {
                 $.post("main.php", datasend, function(data){
                     $('#actor').append('<option value="'+valueSelected+'">'+name_actor+'</option>');
                     $('#modaladdactor').modal('hide');
-                    alert("Актер добавлен!")
+                    swal({
+                        title:"Уведомление",
+                        text:"Актер добавлен!",
+                        type:"success",
+                        confirmButtonColor: "#039BE5"
+                    });
+                
                 });
 
         }
@@ -147,7 +202,13 @@ $(document).ready(function() {
     $('.actorcop').on('click', function (e) {//Копирование актеров предварительная функция
         var valueSelected = $("#films").val();
         if (valueSelected.length < 1){
-            alert("Необходимо выбрать фильм!")
+            swal({
+                title: "Ошибка",
+                text: "Необходимо выбрать фильм!",
+                type: "error",
+                confirmButtonColor: "#039BE5"
+            })
+
         }
         else{
             var datasend = {
@@ -169,7 +230,12 @@ $(document).ready(function() {
 
         var valueSelected = $("#copactors").val();
         if (valueSelected == null){
-            alert("Необходимо выбрать фильм!")
+            swal({
+                title: "Ошибка",
+                text: "Необходимо выбрать фильм!",
+                type: "error",
+                confirmButtonColor: "#039BE5"
+            })
         }
 
         else{
@@ -180,8 +246,13 @@ $(document).ready(function() {
 
                 $.post("main.php", datasend, function(data){
                     if ((data == 15) || ((Number(data) + $('#actor option').length)>=15) ){
+                        swal({
+                            title: "Ошибка",
+                            text: "Ошибка! Нельзя добавить больше 15 актеров в 1 фильм! Сначала удалите актеров из фильма в который хотите добавить!",
+                            type: "error",
+                            confirmButtonColor: "#039BE5"
+                        })
 
-                        alert("Ошибка! Нельзя добавить больше 15 актеров в 1 фильм! Сначала удалите актеров из фильма в который хотите добавить!")
                     }
                     else{
                         var valueSelected = $("#actor").val();
@@ -200,7 +271,13 @@ $(document).ready(function() {
 
                         });
                         $('#modalcopactor').modal('hide');
-                        alert("Актеры добавлены!")
+                        swal({
+                            title:"Уведомление",
+                            text:"Актеры добавлены!",
+                            type:"success",
+                            confirmButtonColor: "#039BE5"
+                        });
+
                     }
                 });
         }

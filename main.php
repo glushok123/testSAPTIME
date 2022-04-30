@@ -5,8 +5,6 @@ require_once 'config/config.php';
 $action = $_POST["action"];
 $db = getDbInstance();
 
-
-
 if ($action=="getfilm"){#Получение списка фильмов
     $res = $db->query("SELECT film_id, title FROM film");
     $json = '[';
