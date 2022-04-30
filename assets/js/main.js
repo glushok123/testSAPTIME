@@ -202,11 +202,6 @@ $(document).ready(function() {
                         alert("Актеры добавлены!")
                     }
                 });
-
         }
-
-
     });
-
 });
-alert("ok");
